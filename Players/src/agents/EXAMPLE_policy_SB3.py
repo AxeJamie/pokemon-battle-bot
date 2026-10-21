@@ -11,7 +11,7 @@ import torch
 from gymnasium.spaces import Box
 from stable_baselines3 import PPO
 from stable_baselines3.common.policies import ActorCriticPolicy
-import EXAMPLEFeaturesExtractor as FeaturesExtractor
+from observables.EXAMPLE_featureExtractor_SB3 import EXAMPLEFeaturesExtractor as FeaturesExtractor
 
 from poke_env.battle import AbstractBattle
 from poke_env.data import GenData

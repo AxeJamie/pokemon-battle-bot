@@ -2,6 +2,7 @@
 Example taken from https://github.com/hsahovic/poke-env/blob/master/examples/self_play.py
 """
 
+N_FEATURES = 12
 from stable_baselines3.common.torch_layers import BaseFeaturesExtractor
 class EXAMPLEFeaturesExtractor(BaseFeaturesExtractor):
     """Extracts the observation tensor from the dict obs and declares features_dim

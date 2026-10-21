@@ -3,9 +3,35 @@ Example taken from https://github.com/hsahovic/poke-env/blob/master/examples/sel
 """
 
 
+import asyncio
+from typing import Any, Awaitable
+
+import numpy as np
+import supersuit as ss
+import torch
+from gymnasium.spaces import Box
+from stable_baselines3 import PPO
+from stable_baselines3.common.policies import ActorCriticPolicy
+from observables.EXAMPLE_featureExtractor_SB3 import  EXAMPLEFeaturesExtractor as FeaturesExtractor
+
+from poke_env.battle import AbstractBattle
+from poke_env.data import GenData
+from poke_env.environment import SinglesEnv
+from poke_env.player import (
+    BattleOrder,
+    DefaultBattleOrder,
+    MaxBasePowerPlayer,
+    Player,
+    RandomPlayer,
+    SimpleHeuristicsPlayer,
+)
+from agents.EXAMPLE_policy_SB3 import MaskedActorCriticPolicy,SelfPlayEnv
+
+BATTLE_FORMAT = "gen9randombattle"
+
 class EXAMPLE_selftrain():
     def __init__(self):
-        ppo = self.train()
+        self.ppo = self.train()
 
     def train(self):
         num_envs = 2
@@ -33,3 +59,6 @@ class EXAMPLE_selftrain():
         vec_env.close()
 
         return ppo
+
+    def get_ppo(self):
+        return self.ppo
