@@ -15,6 +15,8 @@ from poke_env.player import (
 )
 
 BATTLE_FORMAT = "gen9randombattle"
+
+
 def run_evaluate():
     policy_trainer = EXAMPLE_selftrain()
     ppo = policy_trainer.get_ppo()

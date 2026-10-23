@@ -25,9 +25,12 @@ from poke_env.player import (
     RandomPlayer,
     SimpleHeuristicsPlayer,
 )
-from agents.EXAMPLE_policy_SB3 import MaskedActorCriticPolicy,SelfPlayEnv
+from agents.EXAMPLE_policy_SB3 import MaskedActorCriticPolicy
+from environments.EXAMPLE_basic_singles_env import SelfPlayEnv
 
 BATTLE_FORMAT = "gen9randombattle"
+NUM_LEARN_STEPS = 1000 #98_304
+
 
 class EXAMPLE_selftrain():
     def __init__(self):
@@ -55,7 +58,7 @@ class EXAMPLE_selftrain():
         )
 
         # train
-        ppo.learn(98_304)
+        ppo.learn(NUM_LEARN_STEPS)
         vec_env.close()
 
         return ppo

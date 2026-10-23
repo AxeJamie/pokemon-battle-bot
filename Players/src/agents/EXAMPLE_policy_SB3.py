@@ -6,10 +6,7 @@ import asyncio
 from typing import Any, Awaitable
 
 import numpy as np
-import supersuit as ss
 import torch
-from gymnasium.spaces import Box
-from stable_baselines3 import PPO
 from stable_baselines3.common.policies import ActorCriticPolicy
 from observables.EXAMPLE_featureExtractor_SB3 import EXAMPLEFeaturesExtractor as FeaturesExtractor
 
@@ -116,24 +113,3 @@ class PolicyPlayer(Player):
         )
 
 
-
-
-class SelfPlayEnv(SinglesEnv):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.observation_spaces = {
-            agent: Box(-1, 4, shape=(N_FEATURES,), dtype=np.float32)
-            for agent in self.possible_agents
-        }
-
-    def calc_reward(self, battle) -> float:
-        return self.reward_computing_helper(
-            battle,
-            fainted_value=2.0,
-            hp_value=1.0,
-            status_value=0.5,
-            victory_value=30.0,
-        )
-
-    def embed_battle(self, battle: AbstractBattle):
-        return PolicyPlayer.embed_battle(battle)
