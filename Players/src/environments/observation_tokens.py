@@ -1,22 +1,29 @@
 """
-We designate a class here tasked with taking a battle state, and returning the observables that a player may consider when training.
+We designate a class here tasked with taking a battle state, and returning the features that a player may consider when training.
 More precicely, we wish to define the input tokens, and any useful aditional information
 """
 from poke_env.battle import AbstractBattle
 from poke_env.battle.side_condition import SideCondition
 from poke_env.battle.field import Field
 from poke_env.battle.weather import Weather
+from poke_env.battle.pokemon_type import PokemonType
 
 import numpy as np
 
 class ObservableExtractorV1:
+    # Used for the embed_battle method in the SB3 agents
 
     def __init__(self):
         # Define the enumerations for one-hot encoding
         self.WEATHER_IDX = {weather: i for i, weather in enumerate(Weather)}
         self.FIELD_IDX = {field: i for i, field in enumerate(Field)}
         self.SIDE_IDX = {condition: i for i, condition in enumerate(SideCondition)}
+        self.TYPE_IDX = {condition: i for i, condition in enumerate(PokemonType)}
+
+
+
         self.battlefield_token_length = len(self.WEATHER_IDX) + len(self.FIELD_IDX) + 2 * len(self.SIDE_IDX)
+        self.player_token_length = 10
 
     def encode_field(self,battle:AbstractBattle):
 
@@ -52,6 +59,27 @@ class ObservableExtractorV1:
 
         return tokens
 
+    def encode_mons(self,battle:AbstractBattle):
+
+        tokens = np.zeros(self.player_token_length,dtype=np.float32,)
+
+        return tokens
+
+    def encode_active_mon(self,battle:AbstractBattle):
+
+        tokens = np.zeros(self.player_token_length,dtype=np.float32,)
+
+        # One hot for which mon is the active mon
+        # Encoding for battle.pokemon.effects
+
+        return tokens
+
+    def encode_matchups(self,battle:AbstractBattle):
+
+        tokens = np.zeros(self.player_token_length,dtype=np.float32,)
+
+        return tokens
+
     def battle_to_tokens(self,battle: AbstractBattle):
 
         #Field State Tokens - One hot - [Weather,Terrain,Speed Effects..]
@@ -68,4 +96,6 @@ class ObservableExtractorV1:
             ],
             dtype=np.float32,
         )
+
+
 

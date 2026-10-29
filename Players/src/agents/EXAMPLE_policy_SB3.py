@@ -8,7 +8,7 @@ from typing import Any, Awaitable
 import numpy as np
 import torch
 from stable_baselines3.common.policies import ActorCriticPolicy
-from observables.EXAMPLE_featureExtractor_SB3 import EXAMPLEFeaturesExtractor as FeaturesExtractor
+from features.EXAMPLE_featureExtractor_SB3 import EXAMPLEFeaturesExtractor as FeaturesExtractor
 
 from poke_env.battle import AbstractBattle
 from poke_env.data import GenData
